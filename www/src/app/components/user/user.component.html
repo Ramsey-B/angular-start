@@ -1,0 +1,7 @@
+<h4>{{newUser.email}}</h4>
+<form (ngSubmit)="createUser()">
+  <input type="email" [(ngModel)]="newUser.email" name="email">
+  <input type="password" [(ngModel)]="newUser.password" name="password">
+  <input type="text" [(ngModel)]="newUser.username" name="username">
+  <button type="submit">add</button>
+</form>

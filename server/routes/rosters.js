@@ -1,7 +1,7 @@
 var router = require('express').Router()
 var Rosters = require('../models/roster')
 var Users = require('../models/user')
-let session = require('../auth/session')
+let session = require('../auth/sessions')
 
 router.get("/rosters", (req, res) => {
   Rosters.find({
