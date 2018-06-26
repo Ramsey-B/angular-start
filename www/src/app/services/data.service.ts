@@ -9,19 +9,15 @@ import { UserService} from './user.service';
 })
 export class DataService {
   private baseUrl = "//localhost:3000/";
+  user: any;
 
   constructor(private http:Http, private _userService:UserService) {
     console.log("connected to server...");
    }
 
   registerUser(newUser:User){
-    this.http.post(this.baseUrl + 'register', newUser)
-      .pipe(map(res => res.json())).toPromise().then(user => {
-        this._userService.storeUser(user);
-      })
-      .catch(err => {
-        console.log(err, "error")
-      })
+    this._userService.user = this.http.post(this.baseUrl + 'register', newUser)
+      .pipe(map(res => res.json()));
   }
 
   loginUser(){

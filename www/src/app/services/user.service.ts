@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import {User} from '../Models/User'
+import { User } from '../Models/User'
+import { DataService } from './data.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  currentUser:User;
+  user: any;
 
   constructor() { }
 
-  storeUser(user:User) {
-    this.currentUser = user;
-    console.log(this.currentUser, "check")
+  ngOnInit() {
+  }
+
+  getUser(){
+    return this.user
   }
 }
