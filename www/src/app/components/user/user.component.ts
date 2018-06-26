@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User, CreateUser } from '../../Models/User';
 import { DataService } from '../../services/data.service'
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -16,16 +17,18 @@ export class UserComponent implements OnInit {
   user: User;
   createdUser: any;
 
-  constructor(private server:DataService) { }
+  constructor(private server:DataService, private userService:UserService) { }
 
   ngOnInit() {
   }
 
   createUser() {
-    this.user = CreateUser.create(this.newUser)
-    console.log(this.user)
-    this.server.registerUser(this.user).subscribe(createdUser => {
-      console.log(createdUser);
-    });
+    this.user = CreateUser.create(this.newUser);
+    this.server.registerUser(this.user);
+  }
+
+  get currentUser() {
+    console.log(this.userService.currentUser, "computed works")
+    return this.userService.currentUser;
   }
 }

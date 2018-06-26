@@ -5,22 +5,22 @@ var cors = require('cors')
 var port = process.env.PORT || 3000
 
 
-//app.use(express.static(__dirname + "/../www/dist"))
+app.use(express.static(__dirname + "/../www/dist"))
 
-// var whitelist = ['http://localhost:4200', 'https://ramsey-playtunes.herokuapp.com'];
-// var corsOptions = {
-// 	origin: function (origin, callback) {
-// 		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
-// 		callback(null, originIsWhitelisted);
-// 	},
-// 	credentials: true
-// };
-//app.use(cors(corsOptions))
-//require('./db/mlab-config')
-
-app.use(cors())
-//Fire up database connection
+var whitelist = ['http://localhost:4200', 'https://ramsey-playtunes.herokuapp.com'];
+var corsOptions = {
+	origin: function (origin, callback) {
+		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+		callback(null, originIsWhitelisted);
+	},
+	credentials: true
+};
+app.use(cors(corsOptions))
 require('./db/mlab-config')
+
+// app.use(cors())
+// //Fire up database connection
+// require('./db/mlab-config')
 
 
 
