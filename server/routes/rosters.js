@@ -86,3 +86,7 @@ router.delete("/roster/:id/player/:playerId", (req, res) => {
       res.status(400).send({ message: "An error occurred!", err })
     })
 })
+
+module.exports = {
+  router
+}

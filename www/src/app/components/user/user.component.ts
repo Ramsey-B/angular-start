@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User, CreateUser } from '../../interfaces/IUser';
+import { User, CreateUser } from '../../Models/User';
+import { DataService } from '../../services/data.service'
 
 @Component({
   selector: 'app-user',
@@ -13,15 +14,18 @@ export class UserComponent implements OnInit {
     password: ""
   }
   user: User;
+  createdUser: any;
 
-  constructor() { }
+  constructor(private server:DataService) { }
 
   ngOnInit() {
   }
 
   createUser() {
-    debugger
     this.user = CreateUser.create(this.newUser)
     console.log(this.user)
+    this.server.registerUser(this.user).subscribe(createdUser => {
+      console.log(createdUser);
+    });
   }
 }
