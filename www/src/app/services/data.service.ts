@@ -16,8 +16,10 @@ export class DataService {
    }
 
   registerUser(newUser:User){
-    this._userService.user = this.http.post(this.baseUrl + 'register', newUser)
-      .pipe(map(res => res.json()));
+    this.http.post(this.baseUrl + 'register', newUser)
+      .pipe(map(res => res.json())).subscribe(u => {
+        this._userService.createUser(u);
+      })
   }
 
   loginUser(){

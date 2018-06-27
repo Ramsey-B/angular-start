@@ -1,4 +1,4 @@
-<h1></h1>
+<h1 *ngIf="currentUser != null">{{currentUser.username}}</h1>
 
 <h4>{{newUser.email}}</h4>
 <form (ngSubmit)="createUser()">

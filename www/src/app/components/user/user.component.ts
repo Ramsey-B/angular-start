@@ -15,11 +15,16 @@ export class UserComponent implements OnInit {
     password: ""
   }
   user: User;
-  currentUser: User = this.server.user;
+  currentUser: User
 
   constructor(private server:DataService, private _userService:UserService) { }
 
   ngOnInit() {
+    this._userService.cast.subscribe(user => {
+      debugger
+      this.currentUser = user;
+      console.log(user)
+    })
   }
 
   createUser() {
