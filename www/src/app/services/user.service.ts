@@ -16,7 +16,7 @@ export class UserService {
 
   }
 
-  createUser(newUser){
+  updateUser(newUser){
     this.user.next(newUser);
   }
 }

@@ -9,26 +9,27 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  newUser = {
+  user = {
     email: "",
     username: "",
     password: ""
   }
-  user: User;
   currentUser: User
 
   constructor(private server:DataService, private _userService:UserService) { }
 
   ngOnInit() {
     this._userService.cast.subscribe(user => {
-      debugger
       this.currentUser = user;
       console.log(user)
     })
   }
 
   createUser() {
-    this.user = CreateUser.create(this.newUser)
     this.server.registerUser(this.user);
+  }
+
+  loginUser() {
+    this.server.loginUser(this.user);
   }
 }
