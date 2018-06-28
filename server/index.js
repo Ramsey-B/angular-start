@@ -36,6 +36,9 @@ app.use(auth.router)
 let roster = require("./routes/rosters")
 app.use(roster.router)
 
+let api = require("./api/api")
+app.use(api.router);
+
 
 
 app.get('*', (req, res, next) => {

@@ -4,9 +4,11 @@ var schemaName = 'Roster'
 var ObjectId = Schema.Types.ObjectId
 
 var playerSchema = new Schema({
-  displayName: {type: String},
+  fullname: {type: String},
   team: {type: String},
-  position: {type: String}
+  position: {type: String},
+  photo: {type: String},
+  bye_week: {type: String}
 })
 
 var rosterSchema = new Schema({
