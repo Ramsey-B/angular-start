@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { User, CreateUser } from '../Models/User';
 import { map } from 'rxjs/operators';
 import { UserService} from './user.service';
+import { Router } from '@angular/router'
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { UserService} from './user.service';
 export class DataService {
   private baseUrl = "//localhost:3000/";
 
-  constructor(private http:Http, private _userService:UserService) {
+  constructor(private http:Http, private _userService:UserService, private _router:Router) {
     console.log("connected to server...");
    }
 
@@ -25,6 +26,16 @@ export class DataService {
     this.http.post(this.baseUrl + 'login', user)
       .pipe(map(res => res.json())).subscribe(u => {
         this._userService.updateUser(u.data)
+      })
+  }
+
+  authenticate(){
+    this.http.get(this.baseUrl + "authenticate")
+      .pipe(map(res => res.json())).subscribe(u => {
+        if(u.id) {
+          this._userService.updateUser(u);
+          this._router.navigate(['/']);
+        }
       })
   }
 }
