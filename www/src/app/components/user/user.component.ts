@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
   constructor(private server:DataService, private _userService:UserService) { }
 
   ngOnInit() {
+    this.server.authenticate()
     this._userService.cast.subscribe(user => {
       this.currentUser = user;
       console.log(user)

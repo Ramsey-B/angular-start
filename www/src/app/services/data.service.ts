@@ -10,29 +10,34 @@ import { Router } from '@angular/router'
 })
 export class DataService {
   private baseUrl = "//localhost:3000/";
+  HttpOptions = {
+    withCredentials: true,
+    timeout: 3000
+  };
 
   constructor(private http:Http, private _userService:UserService, private _router:Router) {
     console.log("connected to server...");
    }
 
-  registerUser(newUser:User){
-    this.http.post(this.baseUrl + 'register', newUser)
+  registerUser(newUser:Object){
+    this.http.post(this.baseUrl + 'register', newUser, this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(user => {
         this._userService.updateUser(user);
       })
   }
 
-  loginUser(user){
-    this.http.post(this.baseUrl + 'login', user)
+  loginUser(user:Object){
+    this.http.post(this.baseUrl + 'login', user, this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(u => {
         this._userService.updateUser(u.data)
+        console.log(u)
       })
   }
 
   authenticate(){
-    this.http.get(this.baseUrl + "authenticate")
+    this.http.get(this.baseUrl + "authenticate", this.HttpOptions)
       .pipe(map(res => res.json())).subscribe(u => {
-        if(u.id) {
+        if(u != null) {
           this._userService.updateUser(u);
           this._router.navigate(['/']);
         }
